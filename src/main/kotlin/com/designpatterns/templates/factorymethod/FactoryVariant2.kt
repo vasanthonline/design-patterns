@@ -1,7 +1,10 @@
 package com.designpatterns.templates.factorymethod
 
-class FactoryVariant2 : FactoryAbstractClass() {
-    override fun factoryMethod(): FactoryInterface {
-        return FactoryImplementation2()
+import com.designpatterns.templates.factorymethod.implementations.FactoryItemVariant2
+import com.designpatterns.templates.factorymethod.implementations.FactoryItem
+
+class FactoryVariant2 : FactoryAbstract() {
+    override fun createFactoryItem(): FactoryItem {
+        return FactoryItemVariant2()
     }
 }
