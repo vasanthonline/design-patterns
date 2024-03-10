@@ -1,7 +1,9 @@
 package com.designpatterns.templates.factorymethod
 
-class WindowsButton : Button {
-    override fun render() {
-        TODO("Not yet implemented")
+import reactor.core.publisher.Mono
+
+class FactoryImplementation2 : FactoryInterface {
+    override fun run(variant: String): Mono<String> {
+        return Mono.just("Factory Implementation 2 for $variant")
     }
 }

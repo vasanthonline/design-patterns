@@ -1,7 +1,9 @@
 package com.designpatterns.templates.factorymethod
 
-class IOSButton : Button {
-    override fun render() {
-        TODO("Not yet implemented")
+import reactor.core.publisher.Mono
+
+class FactoryImplementation1 : FactoryInterface {
+    override fun run(variant: String): Mono<String> {
+        return Mono.just("Factory Implementation 1 for $variant")
     }
 }

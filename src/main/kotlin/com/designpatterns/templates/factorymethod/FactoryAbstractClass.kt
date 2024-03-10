@@ -1,10 +1,12 @@
 package com.designpatterns.templates.factorymethod
 
-abstract class Dialog {
-    abstract fun createButton(): Button
+import reactor.core.publisher.Mono
 
-    fun render() {
-        val okButton: Button = createButton()
-        okButton.render()
+abstract class FactoryAbstractClass {
+    abstract fun factoryMethod(): FactoryInterface
+
+    fun render(variant: String): Mono<String> {
+        val factoryMethod: FactoryInterface = factoryMethod()
+        return factoryMethod.run(variant)
     }
 }

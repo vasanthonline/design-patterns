@@ -1,5 +1,7 @@
 package com.designpatterns.templates.factorymethod
 
-interface Button {
-    fun render()
+import reactor.core.publisher.Mono
+
+interface FactoryInterface {
+    fun run(variant: String): Mono<String>
 }
