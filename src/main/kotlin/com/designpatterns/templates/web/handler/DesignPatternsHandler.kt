@@ -1,6 +1,7 @@
 package com.designpatterns.templates.web.handler
 
 import com.designpatterns.templates.service.AbstractFactoryService
+import com.designpatterns.templates.service.BuilderService
 import com.designpatterns.templates.service.FactoryMethodService
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -14,35 +15,46 @@ import reactor.core.publisher.Mono
 @Component
 class DesignPatternsHandler(
     private val factoryMethodService: FactoryMethodService,
-    private val abstractFactoryService: AbstractFactoryService
+    private val abstractFactoryService: AbstractFactoryService,
+    private val builderService: BuilderService
 ) {
     fun getFactoryMethod(serverRequest: ServerRequest): Mono<ServerResponse> {
-        val variant = serverRequest.queryParam("variant")
-            .orElseThrow {
-                ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
-                    "'variant' is either missing or invalid."
-                )
-            }
-        return factoryMethodService.getFactoryImplementation(variant).flatMap {
-            ServerResponse.status(HttpStatus.OK)
+        return factoryMethodService
+            .getFactoryImplementation(readVariant(serverRequest))
+            .flatMap {
+                ServerResponse.status(HttpStatus.OK)
                 .body(BodyInserters.fromValue(it))
-        }
+            }
     }
 
     fun getAbstractFactory(serverRequest: ServerRequest): Mono<ServerResponse> {
-        val variant = serverRequest.queryParam("variant")
+        return abstractFactoryService
+            .getFactoryImplementation(readVariant(serverRequest))
+            .collectList()
+            .flatMap {
+                ServerResponse.status(HttpStatus.OK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromValue(it))
+            }
+    }
+
+    fun getBuilder(serverRequest: ServerRequest): Mono<ServerResponse> {
+        return builderService
+            .getBuilderImplementation(readVariant(serverRequest))
+            .collectList().flatMap {
+                ServerResponse.status(HttpStatus.OK)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(BodyInserters.fromValue(it))
+            }
+    }
+
+    fun readVariant(serverRequest: ServerRequest): String {
+        return serverRequest.queryParam("variant")
             .orElseThrow {
                 ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
                     "'variant' is either missing or invalid."
                 )
             }
-        val response = abstractFactoryService.getFactoryImplementation(variant)
-        return response.collectList().flatMap {
-            ServerResponse.status(HttpStatus.OK)
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromValue(it))
-        }
     }
 }

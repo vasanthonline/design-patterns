@@ -30,9 +30,19 @@ class DesignPatternsRouterConfig(
         }
     }
 
+    @Bean
+    fun getBuilder(): RouterFunction<ServerResponse> {
+        return router {
+            BASE_URI.nest {
+                GET(BUILDER_URI).invoke { designPatternsHandler.getBuilder(it) }
+            }
+        }
+    }
+
     companion object {
         const val BASE_URI = "/api/design-patterns"
         const val FACTORY_METHOD_URI = "/factory-method"
         const val ABSTRACT_FACTORY_URI = "/abstract-factory"
+        const val BUILDER_URI = "/builder"
     }
 }
