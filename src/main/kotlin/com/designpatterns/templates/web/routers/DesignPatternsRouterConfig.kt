@@ -39,10 +39,30 @@ class DesignPatternsRouterConfig(
         }
     }
 
+    @Bean
+    fun getPrototype(): RouterFunction<ServerResponse> {
+        return router {
+            BASE_URI.nest {
+                GET(PROTOTYPE_URI).invoke { designPatternsHandler.getPrototype(it) }
+            }
+        }
+    }
+
+    @Bean
+    fun getSingleton(): RouterFunction<ServerResponse> {
+        return router {
+            BASE_URI.nest {
+                GET(SINGLETON_URI).invoke { designPatternsHandler.getSingleton(it) }
+            }
+        }
+    }
+
     companion object {
         const val BASE_URI = "/api/design-patterns"
         const val FACTORY_METHOD_URI = "/factory-method"
         const val ABSTRACT_FACTORY_URI = "/abstract-factory"
         const val BUILDER_URI = "/builder"
+        const val PROTOTYPE_URI = "/prototype"
+        const val SINGLETON_URI = "/singleton"
     }
 }

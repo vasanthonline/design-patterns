@@ -1,8 +1,6 @@
 package com.designpatterns.templates.web.handler
 
-import com.designpatterns.templates.service.AbstractFactoryService
-import com.designpatterns.templates.service.BuilderService
-import com.designpatterns.templates.service.FactoryMethodService
+import com.designpatterns.templates.service.*
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
@@ -16,7 +14,9 @@ import reactor.core.publisher.Mono
 class DesignPatternsHandler(
     private val factoryMethodService: FactoryMethodService,
     private val abstractFactoryService: AbstractFactoryService,
-    private val builderService: BuilderService
+    private val builderService: BuilderService,
+    private val prototypeService: PrototypeService,
+    private val singletonService: SingletonService,
 ) {
     fun getFactoryMethod(serverRequest: ServerRequest): Mono<ServerResponse> {
         return factoryMethodService
@@ -42,6 +42,26 @@ class DesignPatternsHandler(
         return builderService
             .getBuilderImplementation(readVariant(serverRequest))
             .collectList().flatMap {
+                ServerResponse.status(HttpStatus.OK)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(BodyInserters.fromValue(it))
+            }
+    }
+
+    fun getPrototype(serverRequest: ServerRequest): Mono<ServerResponse> {
+        return prototypeService
+            .getPrototypeImplementation(readVariant(serverRequest))
+            .flatMap {
+                ServerResponse.status(HttpStatus.OK)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(BodyInserters.fromValue(it))
+            }
+    }
+
+    fun getSingleton(serverRequest: ServerRequest): Mono<ServerResponse> {
+        return singletonService
+            .getSingletonImplementation(readVariant(serverRequest))
+            .flatMap {
                 ServerResponse.status(HttpStatus.OK)
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(BodyInserters.fromValue(it))
