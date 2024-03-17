@@ -13,46 +13,15 @@ class DesignPatternsRouterConfig(
 ) {
 
     @Bean
-    fun getFactoryMethod(): RouterFunction<ServerResponse> {
+    fun getDesignPattern(): RouterFunction<ServerResponse> {
         return router {
             BASE_URI.nest {
                 GET(FACTORY_METHOD_URI).invoke { designPatternsHandler.getFactoryMethod(it) }
-            }
-        }
-    }
-
-    @Bean
-    fun getAbstractFactory(): RouterFunction<ServerResponse> {
-        return router {
-            BASE_URI.nest {
                 GET(ABSTRACT_FACTORY_URI).invoke { designPatternsHandler.getAbstractFactory(it) }
-            }
-        }
-    }
-
-    @Bean
-    fun getBuilder(): RouterFunction<ServerResponse> {
-        return router {
-            BASE_URI.nest {
                 GET(BUILDER_URI).invoke { designPatternsHandler.getBuilder(it) }
-            }
-        }
-    }
-
-    @Bean
-    fun getPrototype(): RouterFunction<ServerResponse> {
-        return router {
-            BASE_URI.nest {
                 GET(PROTOTYPE_URI).invoke { designPatternsHandler.getPrototype(it) }
-            }
-        }
-    }
-
-    @Bean
-    fun getSingleton(): RouterFunction<ServerResponse> {
-        return router {
-            BASE_URI.nest {
                 GET(SINGLETON_URI).invoke { designPatternsHandler.getSingleton(it) }
+                GET(ADAPTER_URI).invoke { designPatternsHandler.getAdapter(it) }
             }
         }
     }
@@ -64,5 +33,6 @@ class DesignPatternsRouterConfig(
         const val BUILDER_URI = "/builder"
         const val PROTOTYPE_URI = "/prototype"
         const val SINGLETON_URI = "/singleton"
+        const val ADAPTER_URI = "/adapter"
     }
 }

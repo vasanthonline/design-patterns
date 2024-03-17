@@ -17,6 +17,7 @@ class DesignPatternsHandler(
     private val builderService: BuilderService,
     private val prototypeService: PrototypeService,
     private val singletonService: SingletonService,
+    private val adapterService: AdapterService
 ) {
     fun getFactoryMethod(serverRequest: ServerRequest): Mono<ServerResponse> {
         return factoryMethodService
@@ -61,6 +62,16 @@ class DesignPatternsHandler(
     fun getSingleton(serverRequest: ServerRequest): Mono<ServerResponse> {
         return singletonService
             .getSingletonImplementation(readVariant(serverRequest))
+            .flatMap {
+                ServerResponse.status(HttpStatus.OK)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(BodyInserters.fromValue(it))
+            }
+    }
+
+    fun getAdapter(serverRequest: ServerRequest): Mono<ServerResponse> {
+        return adapterService
+            .getAdapterImplementation(readVariant(serverRequest))
             .flatMap {
                 ServerResponse.status(HttpStatus.OK)
                     .contentType(MediaType.APPLICATION_JSON)
