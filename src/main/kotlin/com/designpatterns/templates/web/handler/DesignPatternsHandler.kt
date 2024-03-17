@@ -17,7 +17,8 @@ class DesignPatternsHandler(
     private val builderService: BuilderService,
     private val prototypeService: PrototypeService,
     private val singletonService: SingletonService,
-    private val adapterService: AdapterService
+    private val adapterService: AdapterService,
+    private val bridgeService: BridgeService
 ) {
     fun getFactoryMethod(serverRequest: ServerRequest): Mono<ServerResponse> {
         return factoryMethodService
@@ -72,6 +73,16 @@ class DesignPatternsHandler(
     fun getAdapter(serverRequest: ServerRequest): Mono<ServerResponse> {
         return adapterService
             .getAdapterImplementation(readVariant(serverRequest))
+            .flatMap {
+                ServerResponse.status(HttpStatus.OK)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(BodyInserters.fromValue(it))
+            }
+    }
+
+    fun getBridge(serverRequest: ServerRequest): Mono<ServerResponse> {
+        return bridgeService
+            .getBridgeImplementation(readVariant(serverRequest))
             .flatMap {
                 ServerResponse.status(HttpStatus.OK)
                     .contentType(MediaType.APPLICATION_JSON)
