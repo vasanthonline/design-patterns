@@ -19,7 +19,8 @@ class DesignPatternsHandler(
     private val singletonService: SingletonService,
     private val adapterService: AdapterService,
     private val bridgeService: BridgeService,
-    private val compoundService: CompoundService
+    private val compositeService: CompositeService,
+    private val decoratorService: DecoratorService
 ) {
     fun getFactoryMethod(serverRequest: ServerRequest): Mono<ServerResponse> {
         return factoryMethodService
@@ -91,10 +92,20 @@ class DesignPatternsHandler(
             }
     }
 
-    fun getCompound(serverRequest: ServerRequest): Mono<ServerResponse> {
-        return compoundService
-            .getCompoundImplementation(readVariant(serverRequest))
+    fun getComposite(serverRequest: ServerRequest): Mono<ServerResponse> {
+        return compositeService
+            .getCompositeImplementation(readVariant(serverRequest))
             .collectList().flatMap {
+                ServerResponse.status(HttpStatus.OK)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(BodyInserters.fromValue(it))
+            }
+    }
+
+    fun getDecorator(serverRequest: ServerRequest): Mono<ServerResponse> {
+        return decoratorService
+            .getDecoratorImplementation(readVariant(serverRequest))
+            .flatMap {
                 ServerResponse.status(HttpStatus.OK)
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(BodyInserters.fromValue(it))

@@ -8,8 +8,8 @@ import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @Service
-class CompoundService {
-    fun getCompoundImplementation(variant: String): Flux<String> {
+class CompositeService {
+    fun getCompositeImplementation(variant: String): Flux<String> {
         val node1 = LevelNode1(variant)
         val node2 = LevelNode2(variant)
         val compound = Compound()
