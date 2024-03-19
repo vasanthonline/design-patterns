@@ -23,6 +23,7 @@ class DesignPatternsRouterConfig(
                 GET(SINGLETON_URI).invoke { designPatternsHandler.getSingleton(it) }
                 GET(ADAPTER_URI).invoke { designPatternsHandler.getAdapter(it) }
                 GET(BRIDGE_URI).invoke { designPatternsHandler.getBridge(it) }
+                GET(COMPOUND_URI).invoke { designPatternsHandler.getCompound(it) }
             }
         }
     }
@@ -36,5 +37,6 @@ class DesignPatternsRouterConfig(
         const val SINGLETON_URI = "/singleton"
         const val ADAPTER_URI = "/adapter"
         const val BRIDGE_URI = "/bridge"
+        const val COMPOUND_URI = "/compound"
     }
 }
