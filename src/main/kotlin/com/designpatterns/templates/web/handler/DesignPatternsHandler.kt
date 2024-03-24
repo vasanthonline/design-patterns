@@ -26,6 +26,7 @@ class DesignPatternsHandler(
     private val proxyService: ProxyService,
     private val chainOfResponsibilityService: ChainOfResponsibilityService,
     private val commandService: CommandService,
+    private val iteratorService: IteratorService,
 ) {
     fun getFactoryMethod(serverRequest: ServerRequest): Mono<ServerResponse> {
         return factoryMethodService
@@ -161,6 +162,17 @@ class DesignPatternsHandler(
     fun getCommand(serverRequest: ServerRequest): Mono<ServerResponse> {
         return commandService
             .getCommandImplementation(readQueryParam(serverRequest, "parameter"))
+            .collectList()
+            .flatMap {
+                ServerResponse.status(HttpStatus.OK)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(BodyInserters.fromValue(it))
+            }
+    }
+
+    fun getIterator(serverRequest: ServerRequest): Mono<ServerResponse> {
+        return iteratorService
+            .getIteratorImplementation(readQueryParam(serverRequest, "parameter"))
             .collectList()
             .flatMap {
                 ServerResponse.status(HttpStatus.OK)

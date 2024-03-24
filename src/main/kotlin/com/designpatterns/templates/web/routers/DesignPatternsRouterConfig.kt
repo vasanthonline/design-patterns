@@ -30,6 +30,7 @@ class DesignPatternsRouterConfig(
                 GET(PROXY_URI).invoke { designPatternsHandler.getProxy(it) }
                 GET(CHAIN_OF_RESPONSIBILITY_URI).invoke { designPatternsHandler.getChainOfResponsibility(it) }
                 GET(COMMAND_URI).invoke { designPatternsHandler.getCommand(it) }
+                GET(ITERATOR_URI).invoke { designPatternsHandler.getIterator(it) }
             }
         }
     }
@@ -50,5 +51,6 @@ class DesignPatternsRouterConfig(
         const val PROXY_URI = "/proxy"
         const val CHAIN_OF_RESPONSIBILITY_URI = "/chain-of-responsibility"
         const val COMMAND_URI = "/command"
+        const val ITERATOR_URI = "/iterator"
     }
 }
