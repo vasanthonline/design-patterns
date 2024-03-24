@@ -26,6 +26,7 @@ class DesignPatternsRouterConfig(
                 GET(COMPOSITE_URI).invoke { designPatternsHandler.getComposite(it) }
                 GET(DECORATOR_URI).invoke { designPatternsHandler.getDecorator(it) }
                 GET(FACADE_URI).invoke { designPatternsHandler.getFacade(it) }
+                GET(FLYWEIGHT_URI).invoke { designPatternsHandler.getFlyweight(it) }
             }
         }
     }
@@ -42,5 +43,6 @@ class DesignPatternsRouterConfig(
         const val COMPOSITE_URI = "/composite"
         const val DECORATOR_URI = "/decorator"
         const val FACADE_URI = "/facade"
+        const val FLYWEIGHT_URI = "/flyweight"
     }
 }

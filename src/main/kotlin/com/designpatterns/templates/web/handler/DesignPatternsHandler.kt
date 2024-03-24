@@ -22,6 +22,7 @@ class DesignPatternsHandler(
     private val compositeService: CompositeService,
     private val decoratorService: DecoratorService,
     private val facadeService: FacadeService,
+    private val flyweightService: FlyweightService,
 ) {
     fun getFactoryMethod(serverRequest: ServerRequest): Mono<ServerResponse> {
         return factoryMethodService
@@ -116,6 +117,17 @@ class DesignPatternsHandler(
     fun getFacade(serverRequest: ServerRequest): Mono<ServerResponse> {
         return facadeService
             .getFacadeImplementation(readVariant(serverRequest))
+            .flatMap {
+                ServerResponse.status(HttpStatus.OK)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(BodyInserters.fromValue(it))
+            }
+    }
+
+    fun getFlyweight(serverRequest: ServerRequest): Mono<ServerResponse> {
+        return flyweightService
+            .getFlyweightImplementation()
+            .collectList()
             .flatMap {
                 ServerResponse.status(HttpStatus.OK)
                     .contentType(MediaType.APPLICATION_JSON)
