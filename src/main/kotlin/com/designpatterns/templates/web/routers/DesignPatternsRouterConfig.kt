@@ -31,6 +31,7 @@ class DesignPatternsRouterConfig(
                 GET(CHAIN_OF_RESPONSIBILITY_URI).invoke { designPatternsHandler.getChainOfResponsibility(it) }
                 GET(COMMAND_URI).invoke { designPatternsHandler.getCommand(it) }
                 GET(ITERATOR_URI).invoke { designPatternsHandler.getIterator(it) }
+                GET(MEDIATOR_URI).invoke { designPatternsHandler.getMediator(it) }
             }
         }
     }
@@ -52,5 +53,6 @@ class DesignPatternsRouterConfig(
         const val CHAIN_OF_RESPONSIBILITY_URI = "/chain-of-responsibility"
         const val COMMAND_URI = "/command"
         const val ITERATOR_URI = "/iterator"
+        const val MEDIATOR_URI = "/mediator"
     }
 }
