@@ -24,10 +24,11 @@ class DesignPatternsHandler(
     private val facadeService: FacadeService,
     private val flyweightService: FlyweightService,
     private val proxyService: ProxyService,
+    private val chainOfResponsibilityService: ChainOfResponsibilityService
 ) {
     fun getFactoryMethod(serverRequest: ServerRequest): Mono<ServerResponse> {
         return factoryMethodService
-            .getFactoryImplementation(readVariant(serverRequest))
+            .getFactoryImplementation(readQueryParam(serverRequest))
             .flatMap {
                 ServerResponse.status(HttpStatus.OK)
                 .body(BodyInserters.fromValue(it))
@@ -36,7 +37,7 @@ class DesignPatternsHandler(
 
     fun getAbstractFactory(serverRequest: ServerRequest): Mono<ServerResponse> {
         return abstractFactoryService
-            .getFactoryImplementation(readVariant(serverRequest))
+            .getFactoryImplementation(readQueryParam(serverRequest))
             .collectList()
             .flatMap {
                 ServerResponse.status(HttpStatus.OK)
@@ -47,7 +48,7 @@ class DesignPatternsHandler(
 
     fun getBuilder(serverRequest: ServerRequest): Mono<ServerResponse> {
         return builderService
-            .getBuilderImplementation(readVariant(serverRequest))
+            .getBuilderImplementation(readQueryParam(serverRequest))
             .collectList().flatMap {
                 ServerResponse.status(HttpStatus.OK)
                     .contentType(MediaType.APPLICATION_JSON)
@@ -57,7 +58,7 @@ class DesignPatternsHandler(
 
     fun getPrototype(serverRequest: ServerRequest): Mono<ServerResponse> {
         return prototypeService
-            .getPrototypeImplementation(readVariant(serverRequest))
+            .getPrototypeImplementation(readQueryParam(serverRequest))
             .flatMap {
                 ServerResponse.status(HttpStatus.OK)
                     .contentType(MediaType.APPLICATION_JSON)
@@ -67,7 +68,7 @@ class DesignPatternsHandler(
 
     fun getSingleton(serverRequest: ServerRequest): Mono<ServerResponse> {
         return singletonService
-            .getSingletonImplementation(readVariant(serverRequest))
+            .getSingletonImplementation(readQueryParam(serverRequest))
             .flatMap {
                 ServerResponse.status(HttpStatus.OK)
                     .contentType(MediaType.APPLICATION_JSON)
@@ -77,7 +78,7 @@ class DesignPatternsHandler(
 
     fun getAdapter(serverRequest: ServerRequest): Mono<ServerResponse> {
         return adapterService
-            .getAdapterImplementation(readVariant(serverRequest))
+            .getAdapterImplementation(readQueryParam(serverRequest))
             .flatMap {
                 ServerResponse.status(HttpStatus.OK)
                     .contentType(MediaType.APPLICATION_JSON)
@@ -87,7 +88,7 @@ class DesignPatternsHandler(
 
     fun getBridge(serverRequest: ServerRequest): Mono<ServerResponse> {
         return bridgeService
-            .getBridgeImplementation(readVariant(serverRequest))
+            .getBridgeImplementation(readQueryParam(serverRequest))
             .flatMap {
                 ServerResponse.status(HttpStatus.OK)
                     .contentType(MediaType.APPLICATION_JSON)
@@ -97,7 +98,7 @@ class DesignPatternsHandler(
 
     fun getComposite(serverRequest: ServerRequest): Mono<ServerResponse> {
         return compositeService
-            .getCompositeImplementation(readVariant(serverRequest))
+            .getCompositeImplementation(readQueryParam(serverRequest))
             .collectList().flatMap {
                 ServerResponse.status(HttpStatus.OK)
                     .contentType(MediaType.APPLICATION_JSON)
@@ -107,7 +108,7 @@ class DesignPatternsHandler(
 
     fun getDecorator(serverRequest: ServerRequest): Mono<ServerResponse> {
         return decoratorService
-            .getDecoratorImplementation(readVariant(serverRequest))
+            .getDecoratorImplementation(readQueryParam(serverRequest))
             .flatMap {
                 ServerResponse.status(HttpStatus.OK)
                     .contentType(MediaType.APPLICATION_JSON)
@@ -117,7 +118,7 @@ class DesignPatternsHandler(
 
     fun getFacade(serverRequest: ServerRequest): Mono<ServerResponse> {
         return facadeService
-            .getFacadeImplementation(readVariant(serverRequest))
+            .getFacadeImplementation(readQueryParam(serverRequest))
             .flatMap {
                 ServerResponse.status(HttpStatus.OK)
                     .contentType(MediaType.APPLICATION_JSON)
@@ -138,7 +139,7 @@ class DesignPatternsHandler(
 
     fun getProxy(serverRequest: ServerRequest): Mono<ServerResponse> {
         return proxyService
-            .getProxyImplementation(readVariant(serverRequest))
+            .getProxyImplementation(readQueryParam(serverRequest))
             .flatMap {
                 ServerResponse.status(HttpStatus.OK)
                     .contentType(MediaType.APPLICATION_JSON)
@@ -146,8 +147,18 @@ class DesignPatternsHandler(
             }
     }
 
-    fun readVariant(serverRequest: ServerRequest): String {
-        return serverRequest.queryParam("variant")
+    fun getChainOfResponsibility(serverRequest: ServerRequest): Mono<ServerResponse> {
+        return chainOfResponsibilityService
+            .getChainOfResponsibilityImplementation(readQueryParam(serverRequest, "parameter"))
+            .flatMap {
+                ServerResponse.status(HttpStatus.OK)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(BodyInserters.fromValue(it))
+            }
+    }
+
+    fun readQueryParam(serverRequest: ServerRequest, parameterName: String = "variant"): String {
+        return serverRequest.queryParam(parameterName)
             .orElseThrow {
                 ResponseStatusException(
                     HttpStatus.BAD_REQUEST,

@@ -28,6 +28,7 @@ class DesignPatternsRouterConfig(
                 GET(FACADE_URI).invoke { designPatternsHandler.getFacade(it) }
                 GET(FLYWEIGHT_URI).invoke { designPatternsHandler.getFlyweight(it) }
                 GET(PROXY_URI).invoke { designPatternsHandler.getProxy(it) }
+                GET(CHAIN_OF_RESPONSIBILITY_URI).invoke { designPatternsHandler.getChainOfResponsibility(it) }
             }
         }
     }
@@ -46,5 +47,6 @@ class DesignPatternsRouterConfig(
         const val FACADE_URI = "/facade"
         const val FLYWEIGHT_URI = "/flyweight"
         const val PROXY_URI = "/proxy"
+        const val CHAIN_OF_RESPONSIBILITY_URI = "/chain-of-responsibility"
     }
 }
