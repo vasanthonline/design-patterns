@@ -23,6 +23,7 @@ class DesignPatternsHandler(
     private val decoratorService: DecoratorService,
     private val facadeService: FacadeService,
     private val flyweightService: FlyweightService,
+    private val proxyService: ProxyService,
 ) {
     fun getFactoryMethod(serverRequest: ServerRequest): Mono<ServerResponse> {
         return factoryMethodService
@@ -128,6 +129,16 @@ class DesignPatternsHandler(
         return flyweightService
             .getFlyweightImplementation()
             .collectList()
+            .flatMap {
+                ServerResponse.status(HttpStatus.OK)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(BodyInserters.fromValue(it))
+            }
+    }
+
+    fun getProxy(serverRequest: ServerRequest): Mono<ServerResponse> {
+        return proxyService
+            .getProxyImplementation(readVariant(serverRequest))
             .flatMap {
                 ServerResponse.status(HttpStatus.OK)
                     .contentType(MediaType.APPLICATION_JSON)
