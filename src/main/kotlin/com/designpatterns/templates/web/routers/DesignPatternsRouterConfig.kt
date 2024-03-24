@@ -25,6 +25,7 @@ class DesignPatternsRouterConfig(
                 GET(BRIDGE_URI).invoke { designPatternsHandler.getBridge(it) }
                 GET(COMPOSITE_URI).invoke { designPatternsHandler.getComposite(it) }
                 GET(DECORATOR_URI).invoke { designPatternsHandler.getDecorator(it) }
+                GET(FACADE_URI).invoke { designPatternsHandler.getFacade(it) }
             }
         }
     }
@@ -40,5 +41,6 @@ class DesignPatternsRouterConfig(
         const val BRIDGE_URI = "/bridge"
         const val COMPOSITE_URI = "/composite"
         const val DECORATOR_URI = "/decorator"
+        const val FACADE_URI = "/facade"
     }
 }

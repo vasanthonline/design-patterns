@@ -20,7 +20,8 @@ class DesignPatternsHandler(
     private val adapterService: AdapterService,
     private val bridgeService: BridgeService,
     private val compositeService: CompositeService,
-    private val decoratorService: DecoratorService
+    private val decoratorService: DecoratorService,
+    private val facadeService: FacadeService,
 ) {
     fun getFactoryMethod(serverRequest: ServerRequest): Mono<ServerResponse> {
         return factoryMethodService
@@ -105,6 +106,16 @@ class DesignPatternsHandler(
     fun getDecorator(serverRequest: ServerRequest): Mono<ServerResponse> {
         return decoratorService
             .getDecoratorImplementation(readVariant(serverRequest))
+            .flatMap {
+                ServerResponse.status(HttpStatus.OK)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(BodyInserters.fromValue(it))
+            }
+    }
+
+    fun getFacade(serverRequest: ServerRequest): Mono<ServerResponse> {
+        return facadeService
+            .getFacadeImplementation(readVariant(serverRequest))
             .flatMap {
                 ServerResponse.status(HttpStatus.OK)
                     .contentType(MediaType.APPLICATION_JSON)
