@@ -24,7 +24,8 @@ class DesignPatternsHandler(
     private val facadeService: FacadeService,
     private val flyweightService: FlyweightService,
     private val proxyService: ProxyService,
-    private val chainOfResponsibilityService: ChainOfResponsibilityService
+    private val chainOfResponsibilityService: ChainOfResponsibilityService,
+    private val commandService: CommandService,
 ) {
     fun getFactoryMethod(serverRequest: ServerRequest): Mono<ServerResponse> {
         return factoryMethodService
@@ -150,6 +151,17 @@ class DesignPatternsHandler(
     fun getChainOfResponsibility(serverRequest: ServerRequest): Mono<ServerResponse> {
         return chainOfResponsibilityService
             .getChainOfResponsibilityImplementation(readQueryParam(serverRequest, "parameter"))
+            .flatMap {
+                ServerResponse.status(HttpStatus.OK)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(BodyInserters.fromValue(it))
+            }
+    }
+
+    fun getCommand(serverRequest: ServerRequest): Mono<ServerResponse> {
+        return commandService
+            .getCommandImplementation(readQueryParam(serverRequest, "parameter"))
+            .collectList()
             .flatMap {
                 ServerResponse.status(HttpStatus.OK)
                     .contentType(MediaType.APPLICATION_JSON)
