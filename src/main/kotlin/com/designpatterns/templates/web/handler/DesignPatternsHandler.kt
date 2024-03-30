@@ -29,6 +29,7 @@ class DesignPatternsHandler(
     private val iteratorService: IteratorService,
     private val mediatorService: MediatorService,
     private val mementoService: MementoService,
+    private val observerService: ObserverService,
 ) {
     fun getFactoryMethod(serverRequest: ServerRequest): Mono<ServerResponse> {
         return factoryMethodService
@@ -197,6 +198,17 @@ class DesignPatternsHandler(
     fun getMemento(serverRequest: ServerRequest): Mono<ServerResponse> {
         return mementoService
             .getMementoImplementation(readQueryParam(serverRequest, "parameter"))
+            .flatMap {
+                ServerResponse.status(HttpStatus.OK)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(BodyInserters.fromValue(it))
+            }
+    }
+
+    fun getObserver(serverRequest: ServerRequest): Mono<ServerResponse> {
+        return observerService
+            .getObserverImplementation(readQueryParam(serverRequest, "parameter"))
+            .collectList()
             .flatMap {
                 ServerResponse.status(HttpStatus.OK)
                     .contentType(MediaType.APPLICATION_JSON)

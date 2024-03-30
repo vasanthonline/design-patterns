@@ -33,6 +33,7 @@ class DesignPatternsRouterConfig(
                 GET(ITERATOR_URI).invoke { designPatternsHandler.getIterator(it) }
                 GET(MEDIATOR_URI).invoke { designPatternsHandler.getMediator(it) }
                 GET(MEMENTO_URI).invoke { designPatternsHandler.getMemento(it) }
+                GET(OBSERVER_URI).invoke { designPatternsHandler.getObserver(it) }
             }
         }
     }
@@ -56,5 +57,6 @@ class DesignPatternsRouterConfig(
         const val ITERATOR_URI = "/iterator"
         const val MEDIATOR_URI = "/mediator"
         const val MEMENTO_URI = "/memento"
+        const val OBSERVER_URI = "/observer"
     }
 }
