@@ -31,6 +31,7 @@ class DesignPatternsHandler(
     private val mementoService: MementoService,
     private val observerService: ObserverService,
     private val stateService: StateService,
+    private val strategyService: StrategyService,
 ) {
     fun getFactoryMethod(serverRequest: ServerRequest): Mono<ServerResponse> {
         return factoryMethodService
@@ -220,6 +221,16 @@ class DesignPatternsHandler(
     fun getState(serverRequest: ServerRequest): Mono<ServerResponse> {
         return stateService
             .getStateImplementation(readQueryParam(serverRequest, "variant"))
+            .flatMap {
+                ServerResponse.status(HttpStatus.OK)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(BodyInserters.fromValue(it))
+            }
+    }
+
+    fun getStrategy(serverRequest: ServerRequest): Mono<ServerResponse> {
+        return strategyService
+            .getStrategyImplementation(readQueryParam(serverRequest, "variant"))
             .flatMap {
                 ServerResponse.status(HttpStatus.OK)
                     .contentType(MediaType.APPLICATION_JSON)

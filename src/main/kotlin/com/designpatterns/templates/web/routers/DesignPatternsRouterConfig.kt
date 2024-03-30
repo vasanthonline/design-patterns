@@ -35,6 +35,7 @@ class DesignPatternsRouterConfig(
                 GET(MEMENTO_URI).invoke { designPatternsHandler.getMemento(it) }
                 GET(OBSERVER_URI).invoke { designPatternsHandler.getObserver(it) }
                 GET(STATE_URI).invoke { designPatternsHandler.getState(it) }
+                GET(STRATEGY_URI).invoke { designPatternsHandler.getStrategy(it) }
             }
         }
     }
@@ -60,5 +61,6 @@ class DesignPatternsRouterConfig(
         const val MEMENTO_URI = "/memento"
         const val OBSERVER_URI = "/observer"
         const val STATE_URI = "/state"
+        const val STRATEGY_URI = "/strategy"
     }
 }
