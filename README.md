@@ -18,16 +18,16 @@ To run the sample implementations, start the project with:
       - [/api/design-patterns/factory-method?variant=factory2](http://localhost:8080/api/design-patterns/factory-method?variant=factory2)
 
 2. **Abstract Factory Pattern**
-   - **Definition:** Provides a surrogate or placeholder for another object to control access to it.
-   - **Example:** Virtual proxy for lazy loading of large resources, security proxy to control access rights.
+   - **Definition:** Abstract Factory pattern provides an interface for creating families of related or dependent objects without specifying their concrete classes.
+   - **Example:** In a video game, an abstract factory could create different types of enemies (e.g., monsters, robots) along with their corresponding weapons (e.g., swords, lasers).
    - **Implementation:**
-      - [/api/design-patterns/proxy?variant=v1](http://localhost:8080/api/design-patterns/proxy?variant=v1)
+      - [/api/design-patterns/abstract-factory?variant=factory1](http://localhost:8080/api/design-patterns/abstract-factory?variant=factory1)
+      - [/api/design-patterns/abstract-factory?variant=factory2](http://localhost:8080/api/design-patterns/abstract-factory?variant=factory2)
 
 3. **Builder Pattern:**
    - **Definition:** Separates the construction of a complex object from its representation, allowing the same construction process to create different representations.
    - **Example:** StringBuilder in Java, DocumentBuilder in XML parsing.
    - **Implementation:**
-      - [/api/design-patterns/singleton?variant=1](http://localhost:8080/api/design-patterns/builder?variant=product1)
       - [/api/design-patterns/builder?variant=product2](http://localhost:8080/api/design-patterns/builder?variant=product2)
 
 4. **Prototype Pattern:**
@@ -53,10 +53,10 @@ To run the sample implementations, start the project with:
       - [/api/design-patterns/adapter?variant=variant2](http://localhost:8080/api/design-patterns/adapter?variant=variant2)
 
 2. **Bridge Pattern**
-   - **Definition:** Provides a surrogate or placeholder for another object to control access to it.
-   - **Example:** Virtual proxy for lazy loading of large resources, security proxy to control access rights.
+   - **Definition:** The Bridge pattern is a structural design pattern that decouples an abstraction from its implementation so that the two can vary independently.
+   - **Example:** In a drawing application, the Bridge pattern could separate the drawing tools (abstraction) from the rendering engines (implementation) allowing different tools to be used with different rendering engines.
    - **Implementation:**
-      - [/api/design-patterns/proxy?variant=v1](http://localhost:8080/api/design-patterns/proxy?variant=v1)
+      - [/api/design-patterns/bridge?variant=variant1](http://localhost:8080/api/design-patterns/bridge?variant=variant1)
 
 3. **Composite Pattern:**
    - **Definition:** Composes objects into tree structures to represent part-whole hierarchies. Composite lets clients treat individual objects and compositions of objects uniformly.
@@ -71,10 +71,10 @@ To run the sample implementations, start the project with:
       - [/api/design-patterns/decorator?variant=variant1](http://localhost:8080/api/design-patterns/decorator?variant=variant1)
 
 5. **Facade Pattern**
-   - **Definition:** Provides a surrogate or placeholder for another object to control access to it.
-   - **Example:** Virtual proxy for lazy loading of large resources, security proxy to control access rights.
+   - **Definition:** The Facade pattern is a structural design pattern that provides a simplified interface to a complex system, hiding its complexity from clients.
+   - **Example:** A home theater system's remote control acts as a facade, providing a simple interface for controlling multiple devices (TV, speakers, DVD player) behind the scenes.
    - **Implementation:**
-      - [/api/design-patterns/proxy?variant=v1](http://localhost:8080/api/design-patterns/proxy?variant=v1)
+      - [/api/design-patterns/facade?variant=1](http://localhost:8080/api/design-patterns/facade?variant=1)
 
 6. **Flyweight Pattern**
    - **Definition:** Provides a surrogate or placeholder for another object to control access to it.
