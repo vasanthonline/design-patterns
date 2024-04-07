@@ -32,6 +32,8 @@ class DesignPatternsHandler(
     private val observerService: ObserverService,
     private val stateService: StateService,
     private val strategyService: StrategyService,
+    private val templateService: TemplateService,
+    private val visitorService: VisitorService
 ) {
     fun getFactoryMethod(serverRequest: ServerRequest): Mono<ServerResponse> {
         return factoryMethodService
@@ -231,6 +233,28 @@ class DesignPatternsHandler(
     fun getStrategy(serverRequest: ServerRequest): Mono<ServerResponse> {
         return strategyService
             .getStrategyImplementation(readQueryParam(serverRequest, "variant"))
+            .flatMap {
+                ServerResponse.status(HttpStatus.OK)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(BodyInserters.fromValue(it))
+            }
+    }
+
+    fun getTemplate(serverRequest: ServerRequest): Mono<ServerResponse> {
+        return templateService
+            .getTemplateImplementation(readQueryParam(serverRequest, "variant"))
+            .collectList()
+            .flatMap {
+                ServerResponse.status(HttpStatus.OK)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(BodyInserters.fromValue(it))
+            }
+    }
+
+    fun getVisitor(serverRequest: ServerRequest): Mono<ServerResponse> {
+        return visitorService
+            .getVisitorImplementation(readQueryParam(serverRequest, "variant"))
+            .collectList()
             .flatMap {
                 ServerResponse.status(HttpStatus.OK)
                     .contentType(MediaType.APPLICATION_JSON)

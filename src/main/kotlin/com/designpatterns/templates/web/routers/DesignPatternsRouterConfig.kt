@@ -36,6 +36,8 @@ class DesignPatternsRouterConfig(
                 GET(OBSERVER_URI).invoke { designPatternsHandler.getObserver(it) }
                 GET(STATE_URI).invoke { designPatternsHandler.getState(it) }
                 GET(STRATEGY_URI).invoke { designPatternsHandler.getStrategy(it) }
+                GET(TEMPLATE_URI).invoke { designPatternsHandler.getTemplate(it) }
+                GET(VISITOR_URI).invoke { designPatternsHandler.getVisitor(it) }
             }
         }
     }
@@ -62,5 +64,7 @@ class DesignPatternsRouterConfig(
         const val OBSERVER_URI = "/observer"
         const val STATE_URI = "/state"
         const val STRATEGY_URI = "/strategy"
+        const val TEMPLATE_URI = "/template"
+        const val VISITOR_URI = "/visitor"
     }
 }
