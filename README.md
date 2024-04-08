@@ -77,10 +77,10 @@ To run the sample implementations, start the project with:
       - [/api/design-patterns/facade?variant=1](http://localhost:8080/api/design-patterns/facade?variant=1)
 
 6. **Flyweight Pattern**
-   - **Definition:** Provides a surrogate or placeholder for another object to control access to it.
-   - **Example:** Virtual proxy for lazy loading of large resources, security proxy to control access rights.
+   - **Definition:** The Flyweight pattern is a structural design pattern that minimizes memory usage or computational expenses by sharing as much as possible with similar objects.
+   - **Example:** In a text editor, the Flyweight pattern could be used to store and reuse common character objects (e.g., letters, digits) to reduce memory consumption.
    - **Implementation:**
-      - [/api/design-patterns/proxy?variant=v1](http://localhost:8080/api/design-patterns/proxy?variant=v1)
+      - [/api/design-patterns/flyweight](http://localhost:8080/api/design-patterns/flyweight)
 
 7. **Proxy Pattern:**
    - **Definition:** Provides a surrogate or placeholder for another object to control access to it.
@@ -91,8 +91,8 @@ To run the sample implementations, start the project with:
 ## Behavioural Patterns
 
 1. **Chain of Responsibility Pattern**
-    - **Definition:** Provides a surrogate or placeholder for another object to control access to it.
-    - **Example:** Virtual proxy for lazy loading of large resources, security proxy to control access rights.
+    - **Definition:** The Chain of Responsibility pattern is a behavioral design pattern where a request is passed through a chain of handlers, and each handler decides either to process the request or to pass it to the next handler in the chain.
+    - **Example:** In a customer support system, a customer complaint can be handled by different levels of support personnel (e.g., junior agent, senior agent, manager) until it's resolved, following the Chain of Responsibility pattern.
     - **Implementation:**
        - [/api/design-patterns/proxy?variant=v1](http://localhost:8080/api/design-patterns/proxy?variant=v1)
 
@@ -100,25 +100,25 @@ To run the sample implementations, start the project with:
     - **Definition:** Provides a surrogate or placeholder for another object to control access to it.
     - **Example:** Virtual proxy for lazy loading of large resources, security proxy to control access rights.
     - **Implementation:**
-       - [/api/design-patterns/proxy?variant=v1](http://localhost:8080/api/design-patterns/proxy?variant=v1)
+       - [/api/design-patterns/chain-of-responsibility?parameter=param1](http://localhost:8080/api/design-patterns/chain-of-responsibility?parameter=param1)
 
 3. **Iterator Pattern**
-    - **Definition:** Provides a surrogate or placeholder for another object to control access to it.
-    - **Example:** Virtual proxy for lazy loading of large resources, security proxy to control access rights.
+    - **Definition:** The Iterator pattern is a behavioral design pattern that provides a way to access the elements of an aggregate object sequentially without exposing its underlying representation.
+    - **Example:** Iterating over elements in a list using a for loop in programming languages like Python or Java follows the Iterator pattern, where the iteration logic is abstracted away from the underlying data structure.
     - **Implementation:**
-       - [/api/design-patterns/proxy?variant=v1](http://localhost:8080/api/design-patterns/proxy?variant=v1)
+       - [/api/design-patterns/iterator?parameter=param1](http://localhost:8080/api/design-patterns/iterator?parameter=param1)
 
 4. **Mediator Pattern**
-    - **Definition:** Provides a surrogate or placeholder for another object to control access to it.
-    - **Example:** Virtual proxy for lazy loading of large resources, security proxy to control access rights.
+    - **Definition:** The Mediator pattern is a behavioral design pattern that defines an object that encapsulates how a set of objects interact with each other, promoting loose coupling by keeping objects from referring to each other explicitly.
+    - **Example:** In a chat application, a mediator facilitates communication between users by relaying messages between them, without requiring the users to know each other's details, exemplifying the Mediator pattern.
     - **Implementation:**
-       - [/api/design-patterns/proxy?variant=v1](http://localhost:8080/api/design-patterns/proxy?variant=v1)
+       - [/api/design-patterns/mediator?parameter=param2](http://localhost:8080/api/design-patterns/mediator?parameter=param2)
 
 5. **Memento Pattern**
-    - **Definition:** Provides a surrogate or placeholder for another object to control access to it.
-    - **Example:** Virtual proxy for lazy loading of large resources, security proxy to control access rights.
+    - **Definition:** The Memento pattern is a behavioral design pattern that allows an object's state to be captured and restored at a later time without violating encapsulation.
+    - **Example:** Undo functionality in a text editor, where the editor saves snapshots of its state (e.g., text content) to allow users to revert to previous states, demonstrates the Memento pattern.
     - **Implementation:**
-       - [/api/design-patterns/proxy?variant=v1](http://localhost:8080/api/design-patterns/proxy?variant=v1)
+       - [/api/design-patterns/memento?parameter=param1](http://localhost:8080/api/design-patterns/memento?parameter=param1)
 
 6. **Observer Pattern:**
     - **Definition:** Defines a one-to-many dependency between objects, so that when one object changes state, all its dependents are notified and updated automatically.
@@ -127,10 +127,11 @@ To run the sample implementations, start the project with:
       - [/api/design-patterns/observer?parameter=param](http://localhost:8080/api/design-patterns/observer?parameter=param)
 
 7. **State Pattern**
-    - **Definition:** Provides a surrogate or placeholder for another object to control access to it.
-    - **Example:** Virtual proxy for lazy loading of large resources, security proxy to control access rights.
+    - **Definition:** The State pattern is a behavioral design pattern that allows an object to alter its behavior when its internal state changes. The pattern encapsulates state-related behavior into separate state classes and allows the object to transition between these states dynamically.
+    - **Example:** A vending machine changes its behavior (e.g., dispensing items, accepting payment) based on its internal state (e.g., "ready", "waiting for payment", "out of stock"), showcasing the State pattern.
     - **Implementation:**
-       - [/api/design-patterns/proxy?variant=v1](http://localhost:8080/api/design-patterns/proxy?variant=v1)
+       - [/api/design-patterns/state?variant=variant1](http://localhost:8080/api/design-patterns/state?variant=variant1)
+       - [/api/design-patterns/state?variant=variant2](http://localhost:8080/api/design-patterns/state?variant=variant2)
 
 8. **Strategy Pattern:**
     - **Definition:** Defines a family of algorithms, encapsulates each one, and makes them interchangeable. Strategy lets the algorithm vary independently from clients that use it.
@@ -140,16 +141,18 @@ To run the sample implementations, start the project with:
       - [/api/design-patterns/strategy?variant=variant2](http://localhost:8080/api/design-patterns/strategy?variant=variant2)
 
 9. **Template Pattern**
-   - **Definition:** Provides a surrogate or placeholder for another object to control access to it.
-   - **Example:** Virtual proxy for lazy loading of large resources, security proxy to control access rights.
+   - **Definition:** The Template Method pattern is a behavioral design pattern that defines the skeleton of an algorithm in a method, deferring some steps to subclasses. It allows subclasses to redefine certain steps of the algorithm without changing its structure.
+   - **Example:** A recipe template where the overall steps are defined (e.g., prep, cook, serve) but the specific ingredients and techniques can be customized, illustrating the Template Method pattern.
    - **Implementation:**
-      - [/api/design-patterns/proxy?variant=v1](http://localhost:8080/api/design-patterns/proxy?variant=v1)
+      - [/api/design-patterns/template?variant=variant1](http://localhost:8080/api/design-patterns/template?variant=variant1)
+      - [/api/design-patterns/template?variant=variant2](http://localhost:8080/api/design-patterns/template?variant=variant2)
 
 10. **Visitor Pattern**
-    - **Definition:** Provides a surrogate or placeholder for another object to control access to it.
-    - **Example:** Virtual proxy for lazy loading of large resources, security proxy to control access rights.
+    - **Definition:** The Visitor pattern is a behavioral design pattern that allows adding new operations to objects without modifying their structure by separating the algorithm from the object structure.
+    - **Example:** In a document processing application, a Visitor pattern can be used to implement different export operations (e.g., PDF, HTML) without modifying the structure of the document elements.
     - **Implementation:**
-       - [/api/design-patterns/proxy?variant=v1](http://localhost:8080/api/design-patterns/proxy?variant=v1)
+       - [http://localhost:8080/api/design-patterns/visitor?variant=variant1](http://localhost:8080/api/design-patterns/visitor?variant=variant1)
+       - [http://localhost:8080/api/design-patterns/visitor?variant=variant2](http://localhost:8080/api/design-patterns/visitor?variant=variant2)
 
 
 
