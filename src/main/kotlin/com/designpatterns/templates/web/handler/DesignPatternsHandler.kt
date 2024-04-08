@@ -267,7 +267,7 @@ class DesignPatternsHandler(
             .orElseThrow {
                 ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
-                    "'variant' is either missing or invalid."
+                    "'$parameterName' is either missing or invalid."
                 )
             }
     }

@@ -51,7 +51,7 @@ class DesignPatternsRouterConfig(
         const val SINGLETON_URI = "/singleton"
         const val ADAPTER_URI = "/adapter"
         const val BRIDGE_URI = "/bridge"
-        const val COMPOSITE_URI = "/composite"
+        const val COMPOSITE_URI = "/aq|"
         const val DECORATOR_URI = "/decorator"
         const val FACADE_URI = "/facade"
         const val FLYWEIGHT_URI = "/flyweight"

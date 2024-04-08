@@ -94,13 +94,13 @@ To run the sample implementations, start the project with:
     - **Definition:** The Chain of Responsibility pattern is a behavioral design pattern where a request is passed through a chain of handlers, and each handler decides either to process the request or to pass it to the next handler in the chain.
     - **Example:** In a customer support system, a customer complaint can be handled by different levels of support personnel (e.g., junior agent, senior agent, manager) until it's resolved, following the Chain of Responsibility pattern.
     - **Implementation:**
-       - [/api/design-patterns/proxy?variant=v1](http://localhost:8080/api/design-patterns/proxy?variant=v1)
+       - [/api/design-patterns/chain-of-responsibility?parameter=param1](http://localhost:8080/api/design-patterns/chain-of-responsibility?parameter=param1)
 
 2. **Command Pattern**
     - **Definition:** Provides a surrogate or placeholder for another object to control access to it.
     - **Example:** Virtual proxy for lazy loading of large resources, security proxy to control access rights.
     - **Implementation:**
-       - [/api/design-patterns/chain-of-responsibility?parameter=param1](http://localhost:8080/api/design-patterns/chain-of-responsibility?parameter=param1)
+       - [/api/design-patterns/command?parameter=param1](http://localhost:8080/api/design-patterns/command?parameter=param1)
 
 3. **Iterator Pattern**
     - **Definition:** The Iterator pattern is a behavioral design pattern that provides a way to access the elements of an aggregate object sequentially without exposing its underlying representation.
@@ -151,8 +151,8 @@ To run the sample implementations, start the project with:
     - **Definition:** The Visitor pattern is a behavioral design pattern that allows adding new operations to objects without modifying their structure by separating the algorithm from the object structure.
     - **Example:** In a document processing application, a Visitor pattern can be used to implement different export operations (e.g., PDF, HTML) without modifying the structure of the document elements.
     - **Implementation:**
-       - [http://localhost:8080/api/design-patterns/visitor?variant=variant1](http://localhost:8080/api/design-patterns/visitor?variant=variant1)
-       - [http://localhost:8080/api/design-patterns/visitor?variant=variant2](http://localhost:8080/api/design-patterns/visitor?variant=variant2)
+       - [/api/design-patterns/visitor?variant=variant1](http://localhost:8080/api/design-patterns/visitor?variant=variant1)
+       - [/api/design-patterns/visitor?variant=variant2](http://localhost:8080/api/design-patterns/visitor?variant=variant2)
 
 
 
